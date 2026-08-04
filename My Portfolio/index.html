@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elven John M. Jardio — Personal Web Portfolio</title>
+    <!-- Google Fonts: Plus Jakarta Sans (Neo-Grotesk Sans-Serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- External CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==========================================================================
+       GLOBAL NAVIGATION & HEADER WIREFRAME
+       ========================================================================== -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">ELVEN JOHN M. JARDIO</a>
+            
+            <!-- Mobile Hamburger Button -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open Navigation Menu">≡</button>
+            
+            <!-- Desktop Navigation -->
+            <ul class="desktop-nav">
+                <li><a href="#about">About</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#featured">Projects</a></li>
+                <li><a href="#activities">Activities</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Full-Screen Navigation Overlay (Mobile Wireframe) -->
+    <div class="nav-overlay" id="navOverlay">
+        <button class="close-btn" id="closeBtn" aria-label="Close Navigation Menu">[X] Close</button>
+        <ul class="nav-links">
+            <li><a href="#about" class="nav-link-item">4. ABOUT</a></li>
+            <li><a href="#achievements" class="nav-link-item">5. ACHIEVEMENTS</a></li>
+            <li><a href="#featured" class="nav-link-item">6. PROJECTS</a></li>
+            <li><a href="#activities" class="nav-link-item">COURSE ACTIVITIES</a></li>
+            <li><a href="#contact" class="nav-link-item">7. CONTACT</a></li>
+        </ul>
+    </div>
+
+    <main class="container">
+        
+        <!-- ==========================================================================
+           HERO SECTION
+           ========================================================================== -->
+        <section class="hero" id="hero">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>Building sleek digital experiences at the intersection of structure and art.</h1>
+                    <p class="hero-subtitle">
+                        Hello, I'm Elven John M. Jardio — Web Development Student
+                    </p>
+                </div>
+                <!-- Stacked Portrait Photo (Aspect Ratio: 4:5) -->
+                <div class="hero-media">
+                    <span>[ Portrait Photo Aspect Ratio 4:5 ]</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION: ABOUT ME
+           ========================================================================== -->
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="card card-featured">
+                <p class="bio-main">
+                    Hi, I’m Elven John M. Jardio, an aspiring Web Developer and student. I love building clean, responsive websites and learning new technologies to solve real-world problems.
+                </p>
+                <p class="bio-sub">
+                    Designing clean, effortless digital experiences. I am an aspiring Web Developer focused on building responsive websites.
+                </p>
+            </div>
+
+            <!-- Technical Skills & Core Tech -->
+            <div class="skills-box">
+                <h4>Technical Skills</h4>
+                <div class="skills-group">
+                    <span class="skills-group-title">Languages & Core Tech:</span>
+                    <div>
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                    </div>
+                </div>
+                <div class="skills-group">
+                    <span class="skills-group-title">Tools & Platforms:</span>
+                    <div>
+                        <span class="tag">Git</span>
+                        <span class="tag">GitHub</span>
+                        <span class="tag">VS Code</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION: ACHIEVEMENTS & EXPERIENCES
+           ========================================================================== -->
+        <section id="achievements">
+            <h2 class="section-title">Achievements & Experiences</h2>
+            <div class="grid-2">
+                <!-- Card 1 -->
+                <div class="card">
+                    <h3>Academic Honor Student</h3>
+                    <p>Recognized for academic excellence and maintaining high performance throughout web development coursework.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="card">
+                    <h3>100% Course Completion</h3>
+                    <p>Completed all assigned frontend development activities, HTML & CSS lab exercises, projects, and lab work on time with attention to detail.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION: FEATURED PROJECT
+           ========================================================================== -->
+        <section id="featured">
+            <h2 class="section-title">Featured Project</h2>
+            <div class="card card-featured">
+                <h3>Coursework Showcase Hub</h3>
+                <p>A clean, centralized single-page directory designed to organize, display, and link directly to all my HTML and CSS class assignments. Features a responsive navigation layout and direct access to source code.</p>
+                
+                <div class="tags-container">
+                    <span class="tag">HTML5</span>
+                    <span class="tag">CSS3</span>
+                    <span class="tag">Git</span>
+                </div>
+
+                <div class="button-group">
+                    <a href="https://ejardio250000000409.github.io/ejardio250000000409.github.io" target="_blank" class="btn btn-primary">Live Output</a>
+                    <a href="https://github.com/ejardio250000000409/ejardio250000000409.github.io" target="_blank" class="btn btn-secondary">GitHub Repo</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================================================
+           SECTION: COURSE ACTIVITIES
+           ========================================================================== -->
+        <section id="activities">
+            <h2 class="section-title">Course Activities</h2>
+            
+            <!-- Activity Card 1 -->
+            <div class="card">
+                <h3>HTML Activity 1.1: Fashion Blog</h3>
+                <p>A clean, editorial-style blog layout built using structured HTML elements, headings, text formatting, and embedded media.</p>
+                <div class="button-group">
+                    <a href="https://ejardio250000000409.github.io/Fashion%20Blog/index.html" target="_blank" class="btn btn-primary">Live Output</a>
+                    <a href="https://github.com/ejardio250000000409" target="_blank" class="btn btn-secondary">GitHub</a>
+                </div>
+            </div>
+
+            <!-- Activity Card 2 -->
+            <div class="card">
+                <h3>HTML Activity 1.2: Wine Festival Schedule</h3>
+                <p>An organized, easy-to-read schedule detailing event times, locations, and descriptions using accessible tabular data structures.</p>
+                <div class="button-group">
+                    <a href="https://ejardio250000000409.github.io/Wine%20Festival%20Schedule/index.html" target="_blank" class="btn btn-primary">Live Output</a>
+                    <a href="https://github.com/ejardio250000000409" target="_blank" class="btn btn-secondary">GitHub</a>
+                </div>
+            </div>
+
+            <!-- Activity Card 3 -->
+            <div class="card">
+                <h3>CSS Activity 2.1: Davies Burger</h3>
+                <p>A modern food menu and promotional landing page styled with custom fonts, color schemes, and box-model alignment.</p>
+                <div class="button-group">
+                    <a href="https://ejardio250000000409.github.io/Davies%20Burger/index.html" target="_blank" class="btn btn-primary">Live Output</a>
+                    <a href="https://github.com/ejardio250000000409" target="_blank" class="btn btn-secondary">GitHub</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================================================
+       FOOTER SECTION (DARK MODE)
+       ========================================================================== -->
+    <footer class="footer" id="contact">
+        <div class="container footer-content">
+            <div class="footer-cta">Let's connect and build.</div>
+            
+            <div>
+                <a href="mailto:ejardio_250000000409@" class="footer-email">ejardio_250000000409@</a>
+            </div>
+
+            <div class="footer-socials">
+                <a href="https://github.com/ejardio250000000409" target="_blank">GitHub</a>
+                <a href="#" target="_blank">LinkedIn</a>
+            </div>
+
+            <div class="footer-meta">
+                &copy; 2026 Elven John M. Jardio. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE OVERLAY MENU SCRIPT -->
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const navOverlay = document.getElementById('navOverlay');
+        const navLinkItems = document.querySelectorAll('.nav-link-item');
+
+        hamburgerBtn.addEventListener('click', () => {
+            navOverlay.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            navOverlay.classList.remove('active');
+        });
+
+        navLinkItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navOverlay.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
