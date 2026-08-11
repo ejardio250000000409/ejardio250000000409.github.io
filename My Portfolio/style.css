@@ -104,7 +104,7 @@ a {
 
 img {
     max-width: 100%;
-    height: auto;
+    height auto;
 }
 
 /* Container & Layout Utilities */
@@ -692,10 +692,12 @@ button:focus-visible {
 
 @media (min-width: 850px) {
     .hamburger {
-        display: none;
+        display: none !important;
     }
+    
+    /* HIDE the mobile theme button on desktop screens */
     .mobile-theme-btn {
-        display: none;
+        display: none !important;
     }
 
     .hero-grid {
