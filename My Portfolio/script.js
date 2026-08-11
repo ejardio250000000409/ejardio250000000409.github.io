@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         htmlElement.setAttribute('data-theme', 'light');
     }
 
-    // Toggle theme function across all theme toggle buttons
+    // Toggle theme function across active theme toggle buttons
     themeToggleBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
