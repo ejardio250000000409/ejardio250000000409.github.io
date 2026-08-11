@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ----------------------------------------------------------------------
        1. LIGHT & DARK THEME TOGGLE
        ---------------------------------------------------------------------- */
-    const themeToggleBtn = document.getElementById('themeToggle');
+    const themeToggleBtns = document.querySelectorAll('.theme-toggle');
     const htmlElement = document.documentElement;
 
     // Check localStorage or system preference for initial theme
@@ -17,21 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedTheme) {
         htmlElement.setAttribute('data-theme', savedTheme);
     } else if (prefersDark) {
-        htmlElement.setAttribute('data-theme', 'dark'); // Fixed: Added quotes around 'dark'
+        htmlElement.setAttribute('data-theme', 'dark');
     } else {
         htmlElement.setAttribute('data-theme', 'light');
     }
 
-    // Toggle theme function
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
+    // Toggle theme function across all theme toggle buttons
+    themeToggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
             const currentTheme = htmlElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
             htmlElement.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
         });
-    }
+    });
 
     /* ----------------------------------------------------------------------
        2. MOBILE NAVIGATION OVERLAY TOGGLE
