@@ -1,92 +1,717 @@
 /* ==========================================================================
-   PORTFOLIO INTERACTION & THEME LOGIC
+   1. CSS VARIABLES & COLOR PALETTES (LIGHT & DARK THEMES)
+   ========================================================================== */
+:root {
+    /* Light Theme (Default) */
+    --bg-primary: #fafafa;
+    --primary-tone: #18181b;
+    --secondary-tone: #71717a;
+    --card-bg: #f3f4f6;
+    --card-featured-bg: #ffffff;
+    --accent-white: #ffffff;
+    --dark-footer: #121212;
+    --footer-meta: #a1a1aa;
+    --border-color: #e4e4e7;
+    --border-hover: #3f3f46;
+    --grid-line: rgba(24, 24, 27, 0.05);
+    --glow-color: rgba(37, 99, 235, 0.08);
+    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 20px 35px -10px rgba(0, 0, 0, 0.12);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 24px;
+    --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] {
+    /* Dark Theme */
+    --bg-primary: #090d16;
+    --primary-tone: #f4f4f5;
+    --secondary-tone: #a1a1aa;
+    --card-bg: #111827;
+    --card-featured-bg: #1e293b;
+    --accent-white: #0f172a;
+    --dark-footer: #030712;
+    --footer-meta: #64748b;
+    --border-color: #1f293d;
+    --border-hover: #38bdf8;
+    --grid-line: rgba(255, 255, 255, 0.04);
+    --glow-color: rgba(56, 189, 248, 0.12);
+    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --shadow-hover: 0 20px 40px -10px rgba(56, 189, 248, 0.15);
+}
+
+/* ==========================================================================
+   2. BASE & BACKGROUND PATTERNS
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-primary);
+    color: var(--primary-tone);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    min-height: 100vh;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+}
+
+/* Subtle Web Developer Tech Grid Background */
+.bg-grid-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: -2;
+}
+
+/* Ambient Radial Glow */
+.bg-glow {
+    position: fixed;
+    top: -10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 600px;
+    background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+    transition: background 0.4s ease;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height auto;
+}
+
+/* Container & Layout Utilities */
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 60px 0;
+}
+
+.section-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--primary-tone);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+section:hover .section-title::after {
+    width: 100%;
+}
+
+/* ==========================================================================
+   3. INTERACTIVE COMPONENTS & HOVER ANIMATIONS
    ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+/* Pill / Tag Component */
+.tag {
+    display: inline-block;
+    background-color: var(--card-bg);
+    color: var(--primary-tone);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition-smooth);
+}
+
+.tag:hover {
+    transform: translateY(-3px) scale(1.05);
+    border-color: var(--border-hover);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tags-container {
+    margin-bottom: 16px;
+}
+
+/* Button Components */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 24px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+    border: 1px solid transparent;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background-color: var(--primary-tone);
+    color: var(--bg-primary);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.15);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--card-featured-bg);
+    color: var(--primary-tone);
+    border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--card-bg);
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-secondary:active {
+    transform: translateY(-1px);
+}
+
+/* Card Hover Elevation */
+.hover-lift {
+    transition: var(--transition-smooth);
+}
+
+.hover-lift:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Focus States for Keyboard Navigation */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--primary-tone);
+    outline-offset: 4px;
+}
+
+/* ==========================================================================
+   4. HEADER, NAVIGATION & THEME TOGGLE
+   ========================================================================== */
+.header {
+    position: sticky;
+    top: 0;
+    height: 64px;
+    background-color: rgba(250, 250, 250, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+[data-theme="dark"] .header {
+    background-color: rgba(9, 13, 22, 0.8);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.125rem;
+    letter-spacing: -0.03em;
+    transition: var(--transition-smooth);
+}
+
+.logo:hover {
+    opacity: 0.8;
+    transform: scale(1.02);
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+    color: var(--primary-tone);
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg) scale(1.1);
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-soft);
+}
+
+.mobile-theme-btn {
+    display: flex;
+}
+
+.moon-icon { display: none; }
+.sun-icon { display: block; }
+
+[data-theme="dark"] .moon-icon { display: block; }
+[data-theme="dark"] .sun-icon { display: none; }
+
+.hamburger {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary-tone);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    transition: transform 0.2s ease;
+}
+
+.hamburger:hover {
+    transform: scale(1.15);
+}
+
+/* Desktop Navigation */
+.desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+}
+
+.desktop-nav li {
+    display: flex;
+    align-items: center;
+}
+
+.desktop-nav a {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary-tone);
+    position: relative;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+}
+
+.desktop-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-tone);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.desktop-nav a:hover::after {
+    width: 100%;
+}
+
+/* Full Screen Mobile Nav Overlay */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--dark-footer);
+    color: #ffffff;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.nav-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.close-btn:hover {
+    transform: scale(1.1);
+}
+
+.nav-links {
+    list-style: none;
+    text-align: center;
+}
+
+.nav-links li {
+    margin: 20px 0;
+}
+
+.nav-links a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: transform 0.2s ease, color 0.2s ease;
+    display: inline-block;
+}
+
+.nav-links a:hover {
+    transform: scale(1.1);
+    color: var(--secondary-tone);
+}
+
+/* ==========================================================================
+   5. HERO SECTION
+   ========================================================================== */
+.hero {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.hero-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.hero-content h1 {
+    font-size: 2.25rem;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+}
+
+.hero-subtitle {
+    color: var(--secondary-tone);
+    font-size: 1.125rem;
+}
+
+.hero-media {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition-smooth);
+}
+
+.hero-media:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--border-hover);
+}
+
+.hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.hero-media:hover img {
+    transform: scale(1.03);
+}
+
+/* ==========================================================================
+   6. CARDS & BENTO GRID COMPONENTS
+   ========================================================================== */
+.card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-soft);
+}
+
+.card-featured {
+    background-color: var(--card-featured-bg);
+    padding: 28px;
+}
+
+.card h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: var(--secondary-tone);
+    font-size: 0.9375rem;
+    margin-bottom: 16px;
+}
+
+.bio-main {
+    font-size: 1.0625rem;
+    color: var(--primary-tone) !important;
+    margin-bottom: 12px !important;
+}
+
+.bio-sub {
+    color: var(--secondary-tone) !important;
+    margin-bottom: 0 !important;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Technical Skills Box */
+.skills-box {
+    background-color: var(--card-featured-bg);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    margin-top: 16px;
+    box-shadow: var(--shadow-soft);
+}
+
+.skills-box h4 {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--secondary-tone);
+    margin-bottom: 12px;
+}
+
+.skills-group {
+    margin-bottom: 12px;
+}
+
+.skills-group:last-child {
+    margin-bottom: 0;
+}
+
+.skills-group-title {
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+/* ==========================================================================
+   7. FOOTER SECTION
+   ========================================================================== */
+.footer {
+    background-color: var(--dark-footer);
+    color: #ffffff;
+    padding: 60px 0 30px;
+    margin-top: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.footer-cta {
+    font-size: 1.875rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.footer-email {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #ffffff;
+    word-break: break-all;
+    display: inline-block;
+    margin-top: 8px;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 4px;
+    transition: var(--transition-smooth);
+}
+
+.footer-email:hover {
+    opacity: 0.8;
+    transform: translateX(4px);
+}
+
+.footer-socials {
+    display: flex;
+    gap: 20px;
+    margin-top: 12px;
+}
+
+.footer-socials a {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: underline;
+    transition: var(--transition-smooth);
+}
+
+.footer-socials a:hover {
+    color: var(--secondary-tone);
+    transform: translateY(-2px);
+}
+
+.footer-meta {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--footer-meta);
+    font-size: 0.875rem;
+}
+
+/* ==========================================================================
+   8. ENTRANCE & SCROLL REVEAL ANIMATIONS
+   ========================================================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   9. MEDIA QUERIES (DESKTOP & RESPONSIVE)
+   ========================================================================== */
+@media (max-width: 849px) {
+    .desktop-nav {
+        display: none;
+    }
+}
+
+@media (min-width: 640px) {
+    .button-group {
+        flex-direction: row;
+    }
+    .btn {
+        width: auto;
+    }
+    .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 850px) {
+    .hamburger {
+        display: none !important;
+    }
     
-    /* ----------------------------------------------------------------------
-       1. LIGHT & DARK THEME TOGGLE
-       ---------------------------------------------------------------------- */
-    const themeToggleBtns = document.querySelectorAll('.theme-toggle');
-    const htmlElement = document.documentElement;
-
-    // Check localStorage or system preference for initial theme
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme) {
-        htmlElement.setAttribute('data-theme', savedTheme);
-    } else if (prefersDark) {
-        htmlElement.setAttribute('data-theme', 'dark');
-    } else {
-        htmlElement.setAttribute('data-theme', 'light');
+    /* HIDE the mobile theme button on desktop screens */
+    .mobile-theme-btn {
+        display: none !important;
     }
 
-    // Toggle theme function across all theme toggle buttons
-    themeToggleBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const currentTheme = htmlElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-            htmlElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-    });
-
-    /* ----------------------------------------------------------------------
-       2. MOBILE NAVIGATION OVERLAY TOGGLE
-       ---------------------------------------------------------------------- */
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const closeBtn = document.getElementById('closeBtn');
-    const navOverlay = document.getElementById('navOverlay');
-    const navLinkItems = document.querySelectorAll('.nav-link-item');
-
-    function toggleMenu(isOpen) {
-        if (!navOverlay) return;
-        if (isOpen) {
-            navOverlay.classList.add('active');
-            if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'true');
-            document.body.style.overflow = 'hidden';
-        } else {
-            navOverlay.classList.remove('active');
-            if (hamburgerBtn) hamburgerBtn.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-        }
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: center;
+        gap: 48px;
     }
 
-    if (hamburgerBtn) hamburgerBtn.addEventListener('click', () => toggleMenu(true));
-    if (closeBtn) closeBtn.addEventListener('click', () => toggleMenu(false));
-
-    navLinkItems.forEach(item => {
-        item.addEventListener('click', () => toggleMenu(false));
-    });
-
-    /* ----------------------------------------------------------------------
-       3. INTERSECTION OBSERVER FOR SCROLL REVEAL ANIMATIONS
-       ---------------------------------------------------------------------- */
-    const revealElements = document.querySelectorAll('.reveal');
-
-    if ('IntersectionObserver' in window) {
-        const revealObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            root: null,
-            threshold: 0.05,
-            rootMargin: '0px 0px -20px 0px'
-        });
-
-        revealElements.forEach(element => {
-            revealObserver.observe(element);
-        });
-    } else {
-        // Fallback for older browsers
-        revealElements.forEach(element => {
-            element.classList.add('active');
-        });
+    .hero-content h1 {
+        font-size: 3.25rem;
     }
-});
+
+    .footer-cta {
+        font-size: 2.75rem;
+    }
+}
